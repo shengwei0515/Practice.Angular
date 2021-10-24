@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
+import { HEROES } from '../mock-heroes';
 
 
 @Component({
@@ -11,11 +12,8 @@ import { Hero } from '../hero';
 
 // export make this component can be imported in other place, for example, AppModule
 export class HeroesComponent implements OnInit {
-
-  hero: Hero = {
-    id:1,
-    name: 'Womdstrom'
-  }
+  
+  heroes = HEROES;
 
   constructor() { }
 
@@ -23,5 +21,9 @@ export class HeroesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectedHero?: Hero;
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
 }
 
