@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
+import { HeroService } from '../hero.service'
 
 
 @Component({
@@ -13,12 +14,18 @@ import { HEROES } from '../mock-heroes';
 // export make this component can be imported in other place, for example, AppModule
 export class HeroesComponent implements OnInit {
   
-  heroes = HEROES;
+  heroes: Hero[] = [];
 
-  constructor() { }
+  constructor(private heroService: HeroService) { }
+
+  getHeroes(): void {
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
+  }
 
   // life cycle hook, which will be called after component create
   ngOnInit(): void {
+    this.getHeroes();
   }
 
   selectedHero?: Hero;
